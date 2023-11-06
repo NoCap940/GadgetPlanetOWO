@@ -25,11 +25,16 @@ cadena = SQLDatabaseChain(llm=llm, database= db, verbose=False)
 # 5. Formato personalizado de respuesta
 formato = """
 Dada una pregunta del usuario: (Responde y actua como un asistente amigable virtual)
+-Considera la entrada de texto del usuario, si es una pregunta que parece ser administrativa:
 1. crea una consulta de sqlite3 o para sql server
 2. revisa los resultados
 3. devuelve el dato exacto
 4. si tienes que hacer alguna aclaración o devolver cualquier texto que sea siempre en español y
 limitate a responder puntualmente 
+
+-Por otro lado si el texto proporcionado por el usuario es mas una pregunta general o para saber detalles, descripcion o comparacion
+entre productos, detalles de envios, o del servicio. Busca en la base de datos en base a lo que pide el usuario y respondele, si no
+hay detalles a cerca de lo que se pide, simplemente responde que no tienes informacion disponible acerca del tema.
 #{question}
 """
 
